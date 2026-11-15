@@ -75,14 +75,18 @@ template<class T, class deletor>
 class unique_ptr<T[], deletor> {
 private:
     T* m_data;
+    size_t m_size;
 
     using pointer = T*;
     using const_pointer = const T*;
     using reference = T&;
     using const_reference = const T&;
 
+    using iterator = T*;
+    using const_iterator = const T*;
+
 public:
-    explicit unique_ptr(T* data_ptr = nullptr) : m_data(data_ptr) {
+    explicit unique_ptr(T* data_ptr = nullptr, size_t n = 0) : m_data(data_ptr), m_size(n) {
 
     }
 
@@ -98,12 +102,40 @@ public:
     }
 
 public:
+    iterator begin() {
+        return m_data;
+    }
+
+    iterator end() {
+        return m_data + m_size;
+    }
+
+    const_iterator begin() const {
+        return m_data;
+    }
+
+    const_iterator end() const {
+        return m_data + m_size;
+    }
+
+    size_t size() const {
+        return m_size;
+    }
+
     reference operator*() {
         return *m_data;
     }
 
     const_reference operator*() const {
         return *m_data;
+    }
+
+    reference operator[](size_t i) {
+        return m_data[i];
+    }
+
+    const_reference operator[](size_t i) const {
+        return m_data[i];
     }
 
     pointer operator->() {
@@ -148,7 +180,7 @@ typename std::enable_if<
 >::type
 make_unique(std::size_t n) {
     using Elem = typename std::remove_extent<T>::type;
-    return unique_ptr<T>(new Elem[n]());
+    return unique_ptr<T>(new Elem[n](), n);
 }
 
     

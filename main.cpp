@@ -1,5 +1,6 @@
 #include <iostream>
 #include "toolcpp.h"
+#include <iterator>
 using namespace std;
 
 class test {
@@ -12,6 +13,14 @@ public:
     ~test() {
         cout << "destroy" << endl;
     }
+};
+
+class Range {
+private:
+    int m_begin;
+    int m_end;
+public:
+    Range(int sta, int end) : m_begin(sta), m_end(end) {}
 };
 
 class integer {
@@ -60,9 +69,35 @@ int main(int argc, char const *argv[])
     
     // cout << s_p.use_count() << endl;
 
-    auto arr_ptr = toolcpp::make_shared<integer[]>(5);
-    auto p = arr_ptr;
-    cout << p.use_count() << endl;
+    // auto arr_ptr = toolcpp::make_shared<integer[]>(5);
+    // auto p = arr_ptr;
+    // cout << p.use_count() << endl;
+
+    // int arr[5] = {1, 2, 3,4};
+
+    // for (auto v : arr) {
+    //     cout <<v << endl;
+    // }
+
+    // auto lam = []() {
+    //     return 1;
+    // };
+
+    // cout << __cplusplus << endl;
+
+    auto arr = {1, 2, 3, 4, 5};
+
+    auto integers = toolcpp::mapping(arr, [](int item) {
+        return integer(item);
+    });
+
+    // for (int i = 0; i < integers.size(); ++i) {
+    //     cout << integers[i].val() << endl;
+    // }
+
+    for (const auto& item : integers) {
+        cout << item.val() << endl;
+    }
 
     return 0;
 }
