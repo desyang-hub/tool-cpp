@@ -85,19 +85,35 @@ int main(int argc, char const *argv[])
 
     // cout << __cplusplus << endl;
 
-    auto arr = {1, 2, 3, 4, 5};
+    // auto arr = {1, 2, 3, 4, 5};
 
-    auto integers = toolcpp::mapping(arr, [](int item) {
-        return integer(item);
-    });
+    // auto integers = toolcpp::mapping(arr, [](int item) {
+    //     return integer(item);
+    // });
 
-    // for (int i = 0; i < integers.size(); ++i) {
-    //     cout << integers[i].val() << endl;
+    // // for (int i = 0; i < integers.size(); ++i) {
+    // //     cout << integers[i].val() << endl;
+    // // }
+
+    // for (const auto& item : integers) {
+    //     cout << item.val() << endl;
     // }
 
-    for (const auto& item : integers) {
-        cout << item.val() << endl;
+
+    // toolcpp::Thread woker([]{
+    //     cout << "hhhh" << endl;
+    // });
+
+
+    {
+        toolcpp::ThreadPool pool(2);
+        pool.enqueue([](){
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        });
     }
+    cout << "program is finish!" << endl;
+    
+
 
     return 0;
 }

@@ -8,5 +8,10 @@ set(CMAKE_CXX_STANDARD 11)
 # include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-add_executable(${PROJECT_NAME} main.cpp)
+set(cpp_sources
+    src/toolcpp/Thread.cpp
+    src/toolcpp/ThreadPool.cpp
+)
+
+add_executable(${PROJECT_NAME} ${cpp_sources} main.cpp)
 # target_link_libraries(${PROJECT_NAME})
