@@ -5,3 +5,4 @@
 #include "toolcpp/Thread.h"
 #include "toolcpp/ThreadPool.h"
 #include "toolcpp/priority_queue.h"
+#include "toolcpp/for_each.h"

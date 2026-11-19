@@ -150,6 +150,7 @@ private:
     // 当前头节点失效，需要进行处理
     void adjust() {
         int i = 0;
+        int m_size = m_nums.size();
 
         while (true) {
             int left_id = i*2+1;
@@ -175,45 +176,46 @@ private:
     }
 
 public:
-    priority_queue(std::size_t capacity = HEAP_INIT_SIZE) : m_size(0) {
+    priority_queue(std::size_t capacity = HEAP_INIT_SIZE) {
         m_nums.reserve(capacity);
     }
 
 public:
     size_t capacity() const {
-        return m_capacity;
+        return m_nums.compacity();
     }
 
     size_t size() const {
-        return m_size;
+        return m_nums.size();
     }
 
     bool empty() const {
-        return !m_size;
+        return m_nums.empty();
     }
 
     // 将元素放入
     void push(Elem elem) {
-        m_nums. [m_size] = elem;
-        update(m_size);
-        ++m_size;
+        int size = m_nums.size();
+        m_nums.emplace_back(elem);
+        update(size);
     }
 
     // 将堆顶的元素弹出，并将最后一个元素放到这个位置，并通过交换来保证整体无异常
     Elem pop() {
-        if (!m_size) {
+        int size = m_nums.size();
+        if (!size) {
             throw std::runtime_error("heap is empty.");
         }
 
-        if (m_size == 1) {
-            --m_size;
+        if (size == 1) {
+            m_nums.pop_back();
             return m_nums[0];
         }
 
         Elem elem = m_nums[0];
 
-        std::swap(m_nums[0], m_nums[m_size-1]);
-        --m_size;
+        std::swap(m_nums[0], m_nums[size-1]);
+        m_nums.pop_back();
         adjust();
 
         return elem;

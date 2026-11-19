@@ -35,6 +35,7 @@ public:
     }
 
     int val() const {
+        cout << "m_val: " << m_val << endl;
         return m_val;
     }
 };
@@ -115,17 +116,27 @@ int main(int argc, char const *argv[])
     
 
     // toolcpp::IntHeap heap;
-    toolcpp::priority_queue<int> heap;
+    // toolcpp::priority_queue<int, std::vector<int>, std::greater<int>> heap;
 
-    heap.push(5);
-    heap.push(3);
-    heap.push(4);
-    heap.push(1);
-    heap.push(8);
+    // heap.push(5);
+    // heap.push(3);
+    // heap.push(4);
+    // heap.push(1);
+    // heap.push(8);
 
-    while (!heap.empty()) {
-        cout << heap.pop() << endl;
-    }
+    // while (!heap.empty()) {
+    //     cout << heap.pop() << endl;
+    // }
+
+    // std::vector<int> arr{1, 3, 5, 4};
+
+    // for_each(arr.begin(), arr.end(), [](const int& item){
+    //     cout << "value: " << item << endl;
+    // });
+
+    std::vector<integer> arr{1, 3, 5, 4};
+
+    toolcpp::for_each(arr.begin(), arr.end(), toolcpp::mem_func(&integer::val));
 
 
     return 0;
