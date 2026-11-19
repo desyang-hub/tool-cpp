@@ -2,6 +2,9 @@
 
 #include "control_block.h"
 
+#include <cstddef>
+#include <exception>
+
 // 前置声明
 class weak_ptr;
 

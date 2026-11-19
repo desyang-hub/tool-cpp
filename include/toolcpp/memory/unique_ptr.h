@@ -2,6 +2,9 @@
 
 #include "toolcpp/memory/default_deletor.h"
 
+#include <cstddef>
+#include <exception>
+
 namespace toolcpp {
 
 template<class T, class deletor = default_deletor<T>>
