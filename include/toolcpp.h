@@ -4,3 +4,4 @@
 #include "toolcpp/container.h"
 #include "toolcpp/Thread.h"
 #include "toolcpp/ThreadPool.h"
+#include "toolcpp/priority_queue.h"

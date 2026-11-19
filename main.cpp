@@ -105,14 +105,27 @@ int main(int argc, char const *argv[])
     // });
 
 
-    {
-        toolcpp::ThreadPool pool(2);
-        pool.enqueue([](){
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-        });
-    }
-    cout << "program is finish!" << endl;
+    // {
+    //     toolcpp::ThreadPool pool(2);
+    //     pool.enqueue([](){
+    //         std::this_thread::sleep_for(std::chrono::seconds(1));
+    //     });
+    // }
+    // cout << "program is finish!" << endl;
     
+
+    // toolcpp::IntHeap heap;
+    toolcpp::priority_queue<int> heap;
+
+    heap.push(5);
+    heap.push(3);
+    heap.push(4);
+    heap.push(1);
+    heap.push(8);
+
+    while (!heap.empty()) {
+        cout << heap.pop() << endl;
+    }
 
 
     return 0;
